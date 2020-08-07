@@ -15,6 +15,7 @@ DirtyBasic then packs everything together in a C ++ file, this means only one C+
 
 To program with DirtyBasic it is necessary to now how C++ works.
 But you can learn it side by side.
+There is no error handling with DirtyBasic, you must handle the errors in your code with C++.
 
 I wrote the very first version directly in C ++, which cost me most of the time. 
 Then I converted the project to DirtyBasic and created it with it. Each additional version created with the previous version.
