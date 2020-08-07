@@ -11,7 +11,7 @@ I also found the code confusing with the curly brackets.
 In the meantime I can also program C ++ directly, but I still have problems with "#include files" and the resulting errors.
 
 With DirtyBasic I can create a project with clearly arranged files and includes.
-DirtyBasic then packs everything together in a C ++ file.
+DirtyBasic then packs everything together in a C ++ file. Only one C++ file.
 
 I wrote the very first version directly in C ++, which cost me most of the time. 
 Then I converted the project to DirtyBasic and created it with it. Each additional version created with the previous version.
