@@ -1,0 +1,12 @@
+
+Macro Test
+use = all
+// Kommentar, am besten hier den Typ für die Übergabewerte hinterlegen.
+Macro result = Test( wert1, wert2 )
+	result = MyExampleRoutine( 600, 44.356, wert2 );
+	wert1 = SecExampleFunc( result, wert2 );
+endmacro
+
+XMacro XChange , WithMe
+
+

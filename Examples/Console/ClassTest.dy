@@ -1,0 +1,54 @@
+
+// Shows how long an class-object is valid.
+
+Header
+
+class Demo
+      int zahl
+   public:
+      Method  Demo(int i = 0)    // constructor  
+      Method  ~Demo()               // destructor    
+end class
+
+Mfunc Demo::Demo(int i) : zahl(i)   // constructor
+    Print  "Class object " , zahl , " created. ( message from constructor ).\n\n"
+End Mfunc
+
+Mfunc Demo::~Demo()                  // Destruktor
+    Print  "class object " , zahl, " destroyed ( message from destructor ).\n\n"
+End Mfunc
+
+
+Function void testfunc()
+     Print "Message after testfunc start >"
+     Demo inFuncTest(3)
+     Print  "Message after testfunc return >"
+End Function
+
+CreateObject Demo globalTest         // Global Object
+
+Main
+    Print  endl, "......... start main program .........", endl
+    Demo MainTest(1) 
+    CBlock
+         Print endl, ">> Message after open CBlock > "
+         Demo BlockTest(2)
+         Print  ">> Message after close CBlock >  " , endl // must write before, while destructor answers immediately after the Block is left. 
+    End CBlock
+
+    testfunc()
+
+    For int i = 0 to 10
+           If i = 4
+                 Print endl, ">> Message after  IF > "
+                 Demo Bedingungstest(4)
+                 Print ">> Message after EndIF >  " , endl // must write before, while destructor answers immediately after the If / EndIf Block is left. 
+           EndIf
+		   
+    Next
+
+    Print endl, "......... End Main programm ........." , endl
+    waitkey
+
+EndMain
+

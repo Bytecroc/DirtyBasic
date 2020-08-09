@@ -1,0 +1,81 @@
+
+// C++ Macros 
+// Additiv zum C++ PreCompiler, hier steht der Macrocode im Quelltext, ist somit besser für die Fehlersuche geeignet.
+Macro Test
+usefunction   testfunc01, anotherFuncName
+useinclude / usei  "path/blaInclude.dirty"    oder   <test2.dirty>
+useCppInclude / useci "path/testincl.h"
+useCppStdInclude usecsi <stdio.h>
+use = only  / use = ,<, >, >=, <=, != / use = all (non-alphanumeric) / use != only 
+// Kommentar, am besten hier den Typ für die Übergabewerte hinterlegen.
+// auch darauf hinweisen ob unbedingt eine Variable übergeben werden muss oder ob eine Konstante reicht.
+Macro result = Test( wert1, wert2 )
+	result = MyExampleRoutine( 600, 44.356, wert2 );
+	wert1 = SecExampleFunc( result, wert2 );
+endmacro
+
+In the code this is used in this way
+
+Your Code: (will be converted with Macro-Generator
+
+VarX = Test( VarY, 300.77)
+
+Generates this code:
+
+VarX = MyExampleRoutine( 600, 44.356, 300.77 );
+VarY = SecExampleFunc( VarX, 300.77 );
+	
+____________________________________________________________________________________________________________
+	
+// Es wird nur ein Wort getauscht.  //Hier ist evtl. ein C++ PreCompiler-Macro sinnvoller, oder in Combination <> Rücktausch.
+XMacro XChange , WithMe
+
+YourCode:
+
+money = XChange( mymoney )
+
+Generates:
+
+money = WithMe( mymoney );
+____________________________________________________________________________________________________________
+
+// @_1 << wird jedesmal um eins erhöht, hier: newvar_1, nächstes mal dann: newvar_2
+Macro SecondTest
+Macro SecondTest( abc, @_1 newvar , zzz )
+string newvar;
+StringFunc( &abc, newvar, zzz);
+EndMacro
+
+YourCode:
+
+SecondTest( String1, &VarString, String2 )
+SecondTest( String1, &VarString, String2 )
+
+Generates:
+
+string VarString_1;
+StringFunc( &String1, &VarString_1, String2 );
+string VarString_2;
+StringFunc( &String1, &VarString_2, String2 );
+
+// @@_1 << wird jedesmal um eins erhöht aber in Globalen Bereich übernommen (am Programm Anfang), hier: newvar_1, nächstes mal dann: newvar_2
+//nach @_ oder @@_ wird die Zahl übernommen und anschließend bei jedem Aufruf um eins erhöht. Ein Unterstrich wird angefügt danach die Zahl.
+Macro SecondTest2
+Macro SecondTest2( abc, @@_1 newvar , zzz )
+string newvar;
+StringFunc2( &abc, newvar, zzz);
+EndMacro
+
+YourCode:
+
+SecondTest2( String1, &VarString2, String2 )
+SecondTest2( String1, &VarString2, String2 )
+
+Generates:
+
+string VarString2_x1; //<<< in the Global Var Section.
+string VarString2_x2; //<<< in the Global Var Section.
+
+
+StringFunc2( &String1, &VarString2_x1, String2 );
+StringFunc2( &String1, &VarString2_x2, String2 );

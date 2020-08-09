@@ -1,0 +1,143 @@
+
+// Test how fast is vector against Dynamic-Array and struct-Array
+
+Header
+#include <vector>
+
+
+struct myvec
+	string a
+	int b
+	float c
+end struct
+
+//global window handles
+BeginGlobals
+	int zeit
+	string sout1, sout2, sout3, sout4,CRLF
+	DWORD tm
+	string ad
+	int bd
+	float cd
+EndGlobals
+
+
+Main
+
+	std::vector<myvec> MyVec
+	myvec fillvec
+	DimArray myvec cvec[1000]
+	
+	DimArray string stA[1000]
+	DimArray int stB[1000]
+	DimArray float stC[1000]
+
+	
+
+	int z
+	zeit = GetTickCount()
+	For int i = 0 to 9999
+		for int j = 0 to 999
+			fillvec.a = "ABC"
+			fillvec.b = j
+			fillvec.c = 12.66
+			MyVec.push_back(fillvec)
+			z = j
+		next
+		if i = 9999
+			if z = 999 
+				break
+			endif
+		endif
+		MyVec.clear()
+	Next
+	zeit = GetTickCount()-zeit 
+
+	Print "Vector >>>>  !!! push_back:  ",zeit
+	zeit = GetTickCount()
+	For int i = 0 to 9999
+		for int j = 0 to 999
+			stA[j] = "ABC"
+			stB[j] = j
+			stC[j] = 12.66
+		next
+
+	Next	
+	zeit = GetTickCount()-zeit 
+
+	Print "Array init:  ",zeit
+	zeit = GetTickCount()
+	For int i = 0 to 9999
+		for int j = 0 to 999
+			cvec[j].a = "ABC"
+			cvec[j].b = j
+			cvec[j].c = 12.66
+		next
+
+	Next	
+	
+	zeit = GetTickCount()-zeit 
+
+	Print "Struct Array init:  ",zeit
+	zeit = GetTickCount()
+	
+
+
+	For int i = 0 to 9999
+		for int j = 0 to 999
+			MyVec[j].a = "ABC"
+			MyVec[j].b = j
+			MyVec[j].c = 12.66
+			ad = MyVec[j].a 
+			bd = MyVec[j].b
+			cd = MyVec[j].c
+		next
+
+	Next
+	zeit = GetTickCount()-zeit 
+
+	Print "Vector >>init<< and read:  ",zeit
+	zeit = GetTickCount()
+	For int i = 0 to 9999
+		for int j = 0 to 999
+			stA[j] = "ABC"
+			stB[j] = j
+			stC[j] = 12.66
+			ad = stA[j]
+			bd = stB[j]
+			cd = stC[j]
+		next
+
+	Next	
+	zeit = GetTickCount()-zeit 
+
+	Print "Array init and read:  ",zeit
+	zeit = GetTickCount()
+	For int i = 0 to 9999
+		for int j = 0 to 999
+			cvec[j].a = "ABC"
+			cvec[j].b = j
+			cvec[j].c = 12.66
+			ad = cvec[j].a
+			bd = cvec[j].b
+			cd = cvec[j].c
+		next
+
+	Next	
+	zeit = GetTickCount()-zeit 
+
+	Print "Struct Array init and read:  ",zeit
+	zeit = GetTickCount()
+	
+	
+	delete[] stA
+	delete[] stB
+	delete[] stC
+	delete[] cvec
+
+	waitkey
+
+
+EndMain
+
+
